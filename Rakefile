@@ -170,6 +170,8 @@ def configure_target_server(cluster_name, target)
         json = JSON.parse(File.read("#{cluster_name}.json"), symbolize_names: true)
         server_dns = "http://#{json[:server][:dns]}"
       end
+    when 'nrcan'
+      server_dns = 'http://132.156.197.49:8080'
     else
       server_dns = target
   end
@@ -560,4 +562,9 @@ end
 desc "run NREL24"
 task :run_NREL24 do |t, args|
   task(:run_custom).invoke('nrel24')
+end
+
+desc "run nrcan"
+task :run_nrcan do |t, args|
+  task(:run_custom).invoke('nrcan')
 end
